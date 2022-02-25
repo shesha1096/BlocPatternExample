@@ -115,7 +115,16 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: BlocBuilder<WeatherBloc, WeatherState> (
                 builder: (context, state) {
-                  if (state is WeatherLoaded) // Successful scenario
+
+                  if (state is WeatherLoading)
+                    {
+                      return
+                        Center(
+                          child: CircularProgressIndicator(color: Colors.black,),
+                        );
+                    }
+
+                  else if (state is WeatherLoaded) // Successful scenario
                   {
                     temperature = state.weather.current?.tempC.toString();
                     condition = state.weather.current?.condition?.text;
